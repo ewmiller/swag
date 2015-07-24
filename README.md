@@ -13,4 +13,15 @@ controllers will be able to be invoked, too. Let's say there's a resource called
 a YAML doc specifically for that resource.
 
 ## Latest Version
-The latest version of Swag can be found on [rubygems.org/gems/swag](http://rubygems.org/gems/swag).
+The latest version of Swag can be found on 
+[rubygems.org/gems/swag](http://rubygems.org/gems/swag).
+
+## Running Locally
+To install the latest published version, simply run ```gem install swag```. To build 
+and run from the directory, do the following:
+
+    gem build swag.gemspec
+    irb -Ilb
+    import 'swag'
+
+Then call Swag's methods, such as ```Swag.hi```.

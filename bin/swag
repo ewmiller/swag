@@ -2,3 +2,4 @@
 
 require 'swag'
 puts Swag.hi
+Swag.check
