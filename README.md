@@ -10,7 +10,7 @@ able to enter ```swag``` in the command line, and Swag will figure out their app
 functionality. A YAML file will be generated to describe the results. Specific 
 controllers will be able to be invoked, too. Let's say there's a resource called 
 ```documents``` in a user's app - typing ```swag documents``` will generate 
-a YAML doc specifically for that controller.
+a YAML doc specifically for that resource.
 
 ## Latest Version
 The latest version of Swag can be found on [rubygems.org/gems/swag](http://rubygems.org/gems/swag).
