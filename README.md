@@ -8,8 +8,8 @@ Want an easier way to generate API documentation? The goal of Swag is to automat
 process of writing YAML files for that purpose. From within a Rails app, a user will be 
 able to enter ```swag``` in the command line, and Swag will figure out their app's 
 functionality. A YAML file will be generated to describe the results. Specific 
-controllers will be able to be invoked, too. Let's say there's a controller called 
-```documents_controller``` in a user's app - typing ```swag documents``` will generate 
+controllers will be able to be invoked, too. Let's say there's a resource called 
+```documents``` in a user's app - typing ```swag documents``` will generate 
 a YAML doc specifically for that controller.
 
 ## Latest Version
