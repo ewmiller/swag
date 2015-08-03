@@ -25,3 +25,7 @@ and run from the directory, do the following:
     import 'swag'
 
 Then call Swag's methods, such as ```Swag.hi```.
+
+## Other Info
+This repo includes ```spec.sh```, a bash script for automatically updating the version and
+date information in the ```swag.gemspec``` file.
