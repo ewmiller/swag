@@ -16,10 +16,12 @@ class Swag
 	def self.checkControllers
     	puts "Checking controllers."
 		begin
-		controllerArray = readControllers
-		controllerArray.foreach {|controller| puts "Found #{controller}"}
-    	rescue Exception
+		@controllerArray = readControllers
+		@controllerArray.foreach {|controller| puts "Found #{controller}"}
+    	rescue => ex
     		puts "Error while reading controllers."
+			puts ex.inspect
+			puts ex.backtrace
 		end
 	end
 
@@ -32,9 +34,11 @@ class Swag
 		end
 	end
 
-	private
 	def readControllers
 		arr = {}
 		Dir.foreach("app/controllers") {|x| arr.add(x)}
+		return arr
 	end
+
+	private :readControllers
 end
