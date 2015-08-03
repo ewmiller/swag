@@ -1,4 +1,6 @@
 class Swag
+	def initialize
+	end
 	def self.hi
     	puts "Swag, world."
 	end
@@ -13,11 +15,17 @@ class Swag
     	end
 	end
 
+	def self.readControllers
+		arr = [] 
+		Dir.foreach("app/controllers") {|x| arr.push(x)}
+		return arr
+	end
+
 	def self.checkControllers
     	puts "Checking controllers."
 		begin
-		@controllerArray = readControllers
-		@controllerArray.foreach {|controller| puts "Found #{controller}"}
+		@controllerArray = self.readControllers
+		@controllerArray.each {|controller| puts "Found #{controller}"}
     	rescue => ex
     		puts "Error while reading controllers."
 			puts ex.inspect
@@ -28,17 +36,12 @@ class Swag
 	def self.writePaths
     	puts "Writing paths."
 		begin
+		@controllerArray = self.readControllers
 		doc = open(doc.yml, 'w')
 		doc.truncate(0)
-		doc.write("")
+		doc.write("info: Generated with Swag.\n")
+		doc.write("paths:\n")
+		@controllerArray.each {|c| doc.write("-#{c}\n")}
 		end
 	end
-
-	def readControllers
-		arr = {}
-		Dir.foreach("app/controllers") {|x| arr.add(x)}
-		return arr
-	end
-
-	private :readControllers
 end
