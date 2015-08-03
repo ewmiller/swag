@@ -9,15 +9,16 @@ class Swag
       puts "Rails App detected. Proceeding."
     else
       puts "You must be in a Rails root directory for Swag to work."
+      abort
     end
   end
 
   def self.checkControllers
     puts "Checking controllers."
     begin
-    Dir.foreach("/app/controllers") {|x| puts "Found #{x}"}
+    Dir.foreach("app/controllers") {|x| puts "Found #{x}"}
     
-    rescue Error
+    rescue Exception
       puts "Error while looking for controllers."
     end
   end
