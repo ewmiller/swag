@@ -8,8 +8,7 @@ class Swag
     	if File.exist?("bin/rails")
     		puts "Rails App detected. Proceeding."
     	else
-    		puts "You must be in a Rails root directory for Swag to work.
-    		Aborting."
+    		puts "You must be in a Rails root directory for Swag to work. Aborting."
     		abort
     	end
 	end

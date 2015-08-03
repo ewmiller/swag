@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'swag'
-  s.version     = '0.0.0.8'
+  s.version     = '0.0.0.9'
   s.date        = 20150803
   s.summary     = "Swag. Under development."
   s.description = "A gem with which to generate YAML from a Rails app. Currently
