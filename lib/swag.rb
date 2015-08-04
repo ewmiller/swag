@@ -39,7 +39,7 @@ class Swag
 			c.each_line do |line|
 				if line.include? "def index"
 					puts "#{name} contains index"
-					doc << "        get:\n"
+					doc << "		get:\n"
 				end
 			end
 		end
@@ -57,7 +57,7 @@ class Swag
 			unless (c == "." || c == ".." || c == "concerns" ||
 				c == "application_controller.rb")
 				cSliced = c.slice(0..(c.index('_') -1))
-				doc << "    /#{cSliced}:\n"
+				doc << "	/#{cSliced}:\n"
 				analyzeController(c, doc)
 			end
 		end
