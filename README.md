@@ -26,6 +26,9 @@ and run from the directory, do the following:
 
 Then call Swag's methods, such as ```Swag.hi```.
 
+After installing swag, you can also navigate to a rails directory and call ```swag``` from 
+there.
+
 ## Other Info
 This repo includes ```spec.sh```, a bash script for automatically updating the version and
 date information in the ```swag.gemspec``` file, as well as ```rebuild.sh```, to quicken 
