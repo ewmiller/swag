@@ -32,11 +32,13 @@ class Swag
     	puts "Writing paths."
 		begin
 		doc = File.open("doc.yml", 'w')
-		#maybe unnecessary? doc.truncate(0)
 		doc << "info: Generated with Swag.\n"
 		doc << "paths:\n"
-		Dir.foreach("app/controllers") do |c| 
-			doc << "    -#{c}\n" unless (c == "." || c == "..")
+		Dir.foreach("app/controllers") do |c|
+		unless (c == "." || c == ".." || c == "concerns" ||	c == "application_")
+			c = c.slice(0..(c.index('_') -1))	
+			doc << "    /#{c}:\n"
+		end	
 		end
 	    doc.close	
 		end
