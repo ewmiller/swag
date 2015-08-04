@@ -15,17 +15,12 @@ class Swag
     	end
 	end
 
-	def self.readControllers
-		arr = [] 
-		Dir.foreach("app/controllers") {|x| arr.push(x)}
-		return arr
-	end
-
 	def self.checkControllers
     	puts "Checking controllers."
 		begin
-		@controllerArray = self.readControllers
-		@controllerArray.each {|controller| puts "Found #{controller}"}
+		Dir.foreach("app/controllers") do |c| 
+				puts "Found #{c}"
+		end
     	rescue => ex
     		puts "Error while reading controllers."
 			puts ex.inspect
