@@ -31,12 +31,14 @@ class Swag
 	def self.writePaths
     	puts "Writing paths."
 		begin
-		@controllerArray = self.readControllers
-		doc = open(doc.yml, 'w')
-		doc.truncate(0)
-		doc.write("info: Generated with Swag.\n")
-		doc.write("paths:\n")
-		@controllerArray.each {|c| doc.write("-#{c}\n")}
+		doc = File.open("doc.yml", 'w')
+		#maybe unnecessary? doc.truncate(0)
+		doc << "info: Generated with Swag.\n"
+		doc << "paths:\n"
+		Dir.foreach("app/controllers") do |c| 
+			doc << "    -#{c}\n" unless (c == "." || c == "..")
+		end
+	    doc.close	
 		end
 	end
 end

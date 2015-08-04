@@ -4,3 +4,4 @@ require 'swag'
 puts Swag.hi
 puts Swag.check
 puts Swag.checkControllers
+puts Swag.writePaths
