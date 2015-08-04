@@ -37,7 +37,10 @@ class Swag
 		# controller = File.open("app/controllers/#{name}", 'r')
 		File.open("app/controllers/#{name}", 'r') do |c|
 			c.each_line do |line|
-				puts "#{name} contains index" if line.include? "def index"
+				if line.include? "def index"
+					puts "#{name} contains index"
+					doc << "        get:\n"
+				end
 			end
 		end
 		puts "Closed file." # closed automatically
@@ -53,9 +56,9 @@ class Swag
 		Dir.foreach("app/controllers") do |c|
 			unless (c == "." || c == ".." || c == "concerns" ||
 				c == "application_controller.rb")
+				cSliced = c.slice(0..(c.index('_') -1))
+				doc << "    /#{cSliced}:\n"
 				analyzeController(c, doc)
-				c = c.slice(0..(c.index('_') -1))
-				doc << "    /#{c}:\n"
 			end
 		end
 	  doc.close
