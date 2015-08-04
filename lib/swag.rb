@@ -32,17 +32,31 @@ class Swag
 
 	# writes specific controller's routes (helper for self.writePaths)
 	# 'name' is the controller's name, 'doc' is the open YAML File to write to
-	def self.analyzeController(name, doc)
-		puts "Analyzing controller: #{name}"
-		# controller = File.open("app/controllers/#{name}", 'r')
-		File.open("app/controllers/#{name}", 'r') do |c|
+	def self.analyzeController(controllerName, doc)
+		puts "Analyzing controller: #{controllerName}"
+		# controller = File.open("app/controllers/#{controllerName}", 'r')
+		nameSliced = controllerName.slice(0..(controllerName.index('_') -1))
+		doc << "  /#{nameSliced}:\n"
+		File.open("app/controllers/#{controllerName}", 'r') do |c|
+			@show = false
 			c.each_line do |line|
 				if line.include? "def index"
-					puts "#{name} contains index"
-					doc << "		get:\n"
+					puts "#{controllerName} contains index"
+					doc << "    get:\n"
+					doc << "      description:\n"
+				elsif line.include? "def create"
+					puts "#{controllerName} contains new"
+					doc << "    post:\n"
+					doc << "      description:\n"
+				elsif line.include? "def show"
+					@show = true
 				end
+			end # end each_line do block
+			if @show
+				puts "#{controllerName} contains show"
+				doc << "  /#{nameSliced}/:id\n"
 			end
-		end
+		end # end File.open do block
 		puts "Closed file." # closed automatically
 	end
 
@@ -56,8 +70,6 @@ class Swag
 		Dir.foreach("app/controllers") do |c|
 			unless (c == "." || c == ".." || c == "concerns" ||
 				c == "application_controller.rb")
-				cSliced = c.slice(0..(c.index('_') -1))
-				doc << "	/#{cSliced}:\n"
 				analyzeController(c, doc)
 			end
 		end
