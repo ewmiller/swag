@@ -28,4 +28,5 @@ Then call Swag's methods, such as ```Swag.hi```.
 
 ## Other Info
 This repo includes ```spec.sh```, a bash script for automatically updating the version and
-date information in the ```swag.gemspec``` file.
+date information in the ```swag.gemspec``` file, as well as ```rebuild.sh```, to quicken 
+the process of rebuilding the gem during testing.
