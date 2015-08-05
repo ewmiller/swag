@@ -8,15 +8,22 @@ class SwagHelper
   def readConfig(doc)
     File.open("swagGem/config.yml", 'r') do |c|
       c.each_line do |line|
-        doc << "#{line}\n"
+        doc << "#{line}"
       end # end each line block
     end # close File block
   end
 
   def writeConfig
     config = File.open("swagGem/config.yml", 'w')
-    config << "swag: #{$SWAG_VERSION}"
+    config << "swag: #{$SWAG_VERSION}\n"
     config << "info:\n"
+    config << "    version:\n"
+    config << "    title: #{File.basename(Dir.getwd)}\n"
+    config << "    description: a Rails app.\n"
+    config << "    author:\n"
+    config << "        name:\n"
+    config << "        contact:\n"
+    config << "    license:\n"
     config << "paths:\n"
     config.close
   end
