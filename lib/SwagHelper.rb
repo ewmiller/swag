@@ -9,4 +9,11 @@ class SwagHelper
     doc << "    get:\n"
     doc << "      description:\n"
   end
+
+  def doCreate(controllerName, doc)
+    puts "#{controllerName} contains new"
+    doc << "    post:\n"
+    doc << "      description:\n"
+  end
+  
 end # end class

@@ -49,14 +49,9 @@ class Swag
 			@show = false
 			c.each_line do |line|
 				if line.include? "def index"
-					# puts "#{controllerName} contains index"
-					# doc << "    get:\n"
-					# doc << "      description:\n"
 					@helper.doIndex(controllerName, doc)
 				elsif line.include? "def create"
-					puts "#{controllerName} contains new"
-					doc << "    post:\n"
-					doc << "      description:\n"
+					@helper.doCreate(controllerName, doc)
 				elsif line.include? "def show"
 					@show = true
 				end
