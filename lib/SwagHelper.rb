@@ -31,14 +31,14 @@ class SwagHelper
   def doIndex(nameSliced, controllerName, doc)
     puts "#{controllerName} contains index"
     doc << "    get:\n"
-    doc << "      description: returns an index of all #{nameSliced}.\n"
+    doc << "      description: returns an index for this resource.\n"
   end
 
   def doCreate(nameSliced, controllerName, doc)
     puts "#{controllerName} contains new"
     doc << "    post:\n"
     singular = controllerName.slice(0..(nameSliced.index('s') -1))
-    doc << "      description: creates a new #{singular}\n"
+    doc << "      description: creates a new instance of this resource.\n"
   end
 
   def doShow(nameSliced, controllerName, doc)
