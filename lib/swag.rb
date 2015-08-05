@@ -48,6 +48,7 @@ class Swag
 
 		File.open("app/controllers/#{controllerName}", 'r') do |c|
 			@show = false
+			@delete = false
 			c.each_line do |line|
 				if line.include? "def index"
 					@helper.doIndex(nameSliced, controllerName, doc)
@@ -55,11 +56,12 @@ class Swag
 					@helper.doCreate(nameSliced, controllerName, doc)
 				elsif line.include? "def show"
 					@show = true
+				elsif line.include? "def delete"
+					@delete = true
 				end
 			end # end each_line do block
-			if @show
-				@helper.doShow(nameSliced, controllerName, doc)
-			end
+			@helper.doShow(nameSliced, controllerName, doc) if @show
+			@helper.doDelete(nameSliced, controllerName, doc) if @delete
 		end # end File.open do block (File is closed automatically)
 	end # end analyzeController
 
