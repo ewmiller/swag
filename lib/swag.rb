@@ -57,8 +57,7 @@ class Swag
 				end
 			end # end each_line do block
 			if @show
-				puts "#{controllerName} contains show"
-				doc << "  /#{nameSliced}/:id\n"
+				@helper.doShow(controllerName, doc)
 			end
 		end # end File.open do block (File is closed automatically)
 	end # end analyzeController

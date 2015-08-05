@@ -15,5 +15,9 @@ class SwagHelper
     doc << "    post:\n"
     doc << "      description:\n"
   end
-  
+
+  def doShow(controllerName, doc)
+    puts "#{controllerName} contains show"
+    doc << "  /#{nameSliced}/:id\n"
+  end
 end # end class
