@@ -14,3 +14,5 @@ echo "Gem::Specification.new do |s|
   s.license     = \"BSD-3-Clause\"
   s.executables << 'swag'
   end" > swag.gemspec
+
+echo "SWAG_VERSION = $version" > lib/global_vars.rb
