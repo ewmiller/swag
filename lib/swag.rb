@@ -31,12 +31,14 @@ class Swag
 	end
 
 	# writes specific controller's routes (helper for self.writePaths)
-	# 'name' is the controller's name, 'doc' is the open YAML File to write to
+	# 'controllerName' is the controller's name, 'doc' is the open File
 	def self.analyzeController(controllerName, doc)
 		puts "Analyzing controller: #{controllerName}"
-		# controller = File.open("app/controllers/#{controllerName}", 'r')
+
+		# edits the controller name for use in the File
 		nameSliced = controllerName.slice(0..(controllerName.index('_') -1))
 		doc << "  /#{nameSliced}:\n"
+
 		File.open("app/controllers/#{controllerName}", 'r') do |c|
 			@show = false
 			c.each_line do |line|
@@ -56,24 +58,27 @@ class Swag
 				puts "#{controllerName} contains show"
 				doc << "  /#{nameSliced}/:id\n"
 			end
-		end # end File.open do block
-		puts "Closed file." # closed automatically
-	end
+		end # end File.open do block (File is closed automatically)
+	end # end analyzeController
 
 	# lists controller paths by reading app/controllers directory
 	def self.writePaths
     	puts "Writing paths."
 		begin
-		doc = File.open("doc.yml", 'w')
-		doc << "info: Generated with Swag.\n"
-		doc << "paths:\n"
-		Dir.foreach("app/controllers") do |c|
-			unless (c == "." || c == ".." || c == "concerns" ||
-				c == "application_controller.rb")
-				analyzeController(c, doc)
+			doc = File.open("doc.yml", 'w')
+			doc << "info: Generated with Swag.\n"
+			doc << "paths:\n"
+			Dir.foreach("app/controllers") do |c|
+				unless (c == "." || c == ".." || c == "concerns" ||
+					c == "application_controller.rb")
+					analyzeController(c, doc)
+				end
 			end
-		end
-	  doc.close
-		end
-	end
-end
+	  	doc.close
+			rescue => ex
+				puts "Error while writing paths."
+				puts ex.inspect
+				puts ex.backtrace
+		end # end begin block
+	end # end writePaths
+end # end Class
