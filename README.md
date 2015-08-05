@@ -1,5 +1,5 @@
 # swag
-A Ruby gem for generating YAML from within Rails apps, in the style of 
+A Ruby gem for generating YAML from within Rails apps, in the style of
 [Swagger](http://swagger.io/).
 
 Current status: under development.
@@ -22,13 +22,9 @@ To install the latest published version, simply run ```gem install swag```. To b
 and run from the directory, do the following:
 
     gem build swag.gemspec
-    irb -Ilb
-    import 'swag'
+    gem install ./swag-*.gem
 
-Then call Swag's methods, such as ```Swag.hi```.
-
-After installing swag, you can also navigate to a rails directory and call ```swag``` from
-there.
+Then navigate to a Rails directory and simply run ```swag```.
 
 ## Other Info
 This repo includes ```spec.sh```, a bash script for automatically updating the version and
