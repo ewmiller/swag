@@ -23,7 +23,7 @@ Results will be stored in a directory called ```swagGem```. A default config.yml
 file will be generated on the first run - users can (and should) edit this file
 with custom meta information about their app.
 
-## Build Scripts
+## Build Scripts (for gem development)
 This repository includes ```spec.sh```, a bash script for automatically updating the version and
 date information in the ```swag.gemspec``` file, as well as ```rebuild.sh```, to quicken
 the process of rebuilding the gem during testing. I recommend using these for
