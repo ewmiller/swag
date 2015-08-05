@@ -1,6 +1,12 @@
+require_relative 'SwagHelper.rb'
+
 class Swag
+
+	@helper = SwagHelper.new
+
 	def initialize
 	end
+
 	def self.hi
     	puts "Swag, world."
 	end
@@ -20,15 +26,15 @@ class Swag
 	def self.checkControllers
     	puts "Checking controllers."
 		begin
-		Dir.foreach("app/controllers") do |c|
-				puts "Found #{c}"
-		end
-    	rescue => ex
-    		puts "Error while reading controllers."
-			puts ex.inspect
-			puts ex.backtrace
-		end
-	end
+			Dir.foreach("app/controllers") do |c|
+					puts "Found #{c}"
+				end
+    		rescue => ex
+    			puts "Error while reading controllers."
+					puts ex.inspect
+					puts ex.backtrace
+		end # end begin
+	end # end checkControllers
 
 	# writes specific controller's routes (helper for self.writePaths)
 	# 'controllerName' is the controller's name, 'doc' is the open File
@@ -43,9 +49,10 @@ class Swag
 			@show = false
 			c.each_line do |line|
 				if line.include? "def index"
-					puts "#{controllerName} contains index"
-					doc << "    get:\n"
-					doc << "      description:\n"
+					# puts "#{controllerName} contains index"
+					# doc << "    get:\n"
+					# doc << "      description:\n"
+					@helper.doIndex(controllerName, doc)
 				elsif line.include? "def create"
 					puts "#{controllerName} contains new"
 					doc << "    post:\n"
