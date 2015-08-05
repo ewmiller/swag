@@ -1,4 +1,4 @@
-require_relative 'SwagHelper.rb'
+require_relative 'swag_helper.rb'
 
 class Swag
 
