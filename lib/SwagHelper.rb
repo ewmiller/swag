@@ -13,16 +13,17 @@ class SwagHelper
   end
 
   # prints index info to open YAML File 'doc'
-  def doIndex(controllerName, doc)
+  def doIndex(nameSliced, controllerName, doc)
     puts "#{controllerName} contains index"
     doc << "    get:\n"
-    doc << "      description:\n"
+    doc << "      description: returns an index of all #{nameSliced}.\n"
   end
 
-  def doCreate(controllerName, doc)
+  def doCreate(nameSliced, controllerName, doc)
     puts "#{controllerName} contains new"
     doc << "    post:\n"
-    doc << "      description:\n"
+    singular = controllerName.slice(0..(nameSliced.index('s') -1))}
+    doc << "      description: creates a new #{singular}\n"
   end
 
   def doShow(nameSliced, controllerName, doc)

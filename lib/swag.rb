@@ -49,9 +49,9 @@ class Swag
 			@show = false
 			c.each_line do |line|
 				if line.include? "def index"
-					@helper.doIndex(controllerName, doc)
+					@helper.doIndex(nameSliced, controllerName, doc)
 				elsif line.include? "def create"
-					@helper.doCreate(controllerName, doc)
+					@helper.doCreate(nameSliced, controllerName, doc)
 				elsif line.include? "def show"
 					@show = true
 				end
