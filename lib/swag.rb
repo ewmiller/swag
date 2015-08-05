@@ -64,7 +64,7 @@ class Swag
 
 	# lists controller paths by reading app/controllers directory
 	def self.writePaths
-    	puts "Writing paths."
+    puts "Writing paths."
 		begin
 			# creates directory for swag to use
 			Dir.mkdir("swagGem") unless File.exists?("swagGem")

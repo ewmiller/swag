@@ -11,6 +11,13 @@ class SwagHelper
     end # close File block
   end
 
+  def writeConfig
+    config = File.open("swagGem/config.yml", 'w')
+    config << "info:\n"
+    config << "paths:\n"
+    config.close
+  end
+
   # checks config info
   def checkConfig(doc)
     # open config file (if it exists)
@@ -19,10 +26,7 @@ class SwagHelper
     if File.exists?("swagGem/config.yml")
       readConfig(doc)
     else
-      config = File.open("swagGem/config.yml", 'w')
-      config << "info:\n"
-      config << "paths:\n"
-      config.close
+      writeConfig
       readConfig(doc)
     end
   end
