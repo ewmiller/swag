@@ -22,7 +22,7 @@ class SwagHelper
   def doCreate(nameSliced, controllerName, doc)
     puts "#{controllerName} contains new"
     doc << "    post:\n"
-    singular = controllerName.slice(0..(nameSliced.index('s') -1))}
+    singular = controllerName.slice(0..(nameSliced.index('s') -1))
     doc << "      description: creates a new #{singular}\n"
   end
 
