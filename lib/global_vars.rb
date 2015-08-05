@@ -1,1 +1,1 @@
-$SWAG_VERSION = '0.1.5'
+SWAG_VERSION = '0.2.0'

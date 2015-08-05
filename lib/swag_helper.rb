@@ -15,7 +15,7 @@ class SwagHelper
 
   def writeConfig
     config = File.open("swagGem/config.yml", 'w')
-    config << "swag: #{$SWAG_VERSION}\n"
+    config << "swag: #{SWAG_VERSION}\n"
     config << "info:\n"
     config << "  version:\n"
     config << "  title: #{File.basename(Dir.getwd)}\n"
