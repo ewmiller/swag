@@ -1,4 +1,5 @@
 require_relative 'swag_helper.rb'
+require_relative 'global_vars.rb'
 
 class Swag
 

@@ -27,9 +27,11 @@ and run from the directory, do the following:
 Then navigate to a Rails directory and simply run ```swag```.
 
 ## Build Scripts
-This repo includes ```spec.sh```, a bash script for automatically updating the version and
+This repository includes ```spec.sh```, a bash script for automatically updating the version and
 date information in the ```swag.gemspec``` file, as well as ```rebuild.sh```, to quicken
-the process of rebuilding the gem during testing.
+the process of rebuilding the gem during testing. I recommend using these for
+development; they quicken the process and make sure that global variables stay
+up-to-date.
 
 ## License
 

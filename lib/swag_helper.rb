@@ -1,3 +1,5 @@
+require_relative 'global_vars.rb'
+
 class SwagHelper
 
   def initialize
@@ -13,6 +15,7 @@ class SwagHelper
 
   def writeConfig
     config = File.open("swagGem/config.yml", 'w')
+    config << "swag: #{$SWAG_VERSION}"
     config << "info:\n"
     config << "paths:\n"
     config.close
