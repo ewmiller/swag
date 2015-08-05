@@ -3,13 +3,28 @@ class SwagHelper
   def initialize
   end
 
-  # writes config info to YAML doc
-  def doConfig(doc)
-    # open config file (make one if it doesn't exist)
+  def readConfig(doc)
+    File.open("swagGem/config.yml", 'r') do |c|
+      c.each_line do |line|
+        doc << "#{line}\n"
+      end # end each line block
+    end # close File block
+  end
+
+  # checks config info
+  def checkConfig(doc)
+    # open config file (if it exists)
     # read line-by-line
     # write relevant information to doc
-    doc << "info: Generated with Swag.\n"
-    doc << "paths:\n"
+    if File.exists?("swagGem/config.yml")
+      readConfig(doc)
+    else
+      config = File.open("swagGem/config.yml", 'w')
+      config << "info:\n"
+      config << "paths:\n"
+      config.close
+      readConfig(doc)
+    end
   end
 
   # prints index info to open YAML File 'doc'

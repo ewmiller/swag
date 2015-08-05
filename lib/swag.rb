@@ -68,10 +68,11 @@ class Swag
 		begin
 			# creates directory for swag to use
 			Dir.mkdir("swagGem") unless File.exists?("swagGem")
-
 			doc = File.open("swagGem/api.yml", 'w')
-			doc << "info: Generated with Swag.\n"
-			doc << "paths:\n"
+
+			# sets up doc w/ config info
+			@helper.checkConfig(doc)
+
 			Dir.foreach("app/controllers") do |c|
 				unless (c == "." || c == ".." || c == "concerns" ||
 					c == "application_controller.rb")
