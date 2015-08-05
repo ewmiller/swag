@@ -11,6 +11,6 @@ echo "Gem::Specification.new do |s|
   s.email       = \"ethan.w.miller@gmail.com\"
   s.files       = [\"lib/Swag.rb\", \"lib/SwagHelper.rb\"]
   s.homepage    = 'http://rubygems.org/gems/swag'
-  s.license     = \"\"
+  s.license     = \"BSD-3-Clause\"
   s.executables << 'swag'
   end" > swag.gemspec
