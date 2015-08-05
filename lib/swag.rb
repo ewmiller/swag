@@ -57,7 +57,7 @@ class Swag
 				end
 			end # end each_line do block
 			if @show
-				@helper.doShow(controllerName, doc)
+				@helper.doShow(nameSliced, controllerName, doc)
 			end
 		end # end File.open do block (File is closed automatically)
 	end # end analyzeController
@@ -66,7 +66,10 @@ class Swag
 	def self.writePaths
     	puts "Writing paths."
 		begin
-			doc = File.open("doc.yml", 'w')
+			# creates directory for swag to use
+			Dir.mkdir("swagGem") unless File.exists?("swagGem")
+
+			doc = File.open("swagGem/api.yml", 'w')
 			doc << "info: Generated with Swag.\n"
 			doc << "paths:\n"
 			Dir.foreach("app/controllers") do |c|

@@ -3,6 +3,15 @@ class SwagHelper
   def initialize
   end
 
+  # writes config info to YAML doc
+  def doConfig(doc)
+    # open config file (make one if it doesn't exist)
+    # read line-by-line
+    # write relevant information to doc
+    doc << "info: Generated with Swag.\n"
+    doc << "paths:\n"
+  end
+
   # prints index info to open YAML File 'doc'
   def doIndex(controllerName, doc)
     puts "#{controllerName} contains index"
@@ -16,7 +25,7 @@ class SwagHelper
     doc << "      description:\n"
   end
 
-  def doShow(controllerName, doc)
+  def doShow(nameSliced, controllerName, doc)
     puts "#{controllerName} contains show"
     doc << "  /#{nameSliced}/:id\n"
   end
