@@ -1,6 +1,13 @@
+require_relative 'swag_helper.rb'
+require_relative 'global_vars.rb'
+
 class Swag
+
+	@helper = SwagHelper.new
+
 	def initialize
 	end
+
 	def self.hi
     	puts "Swag, world."
 	end
@@ -20,60 +27,64 @@ class Swag
 	def self.checkControllers
     	puts "Checking controllers."
 		begin
-		Dir.foreach("app/controllers") do |c|
-				puts "Found #{c}"
-		end
-    	rescue => ex
-    		puts "Error while reading controllers."
-			puts ex.inspect
-			puts ex.backtrace
-		end
-	end
+			Dir.foreach("app/controllers") do |c|
+					puts "Found #{c}"
+				end
+    		rescue => ex
+    			puts "Error while reading controllers."
+					puts ex.inspect
+					puts ex.backtrace
+		end # end begin
+	end # end checkControllers
 
 	# writes specific controller's routes (helper for self.writePaths)
-	# 'name' is the controller's name, 'doc' is the open YAML File to write to
+	# 'controllerName' is the controller's name, 'doc' is the open File
 	def self.analyzeController(controllerName, doc)
 		puts "Analyzing controller: #{controllerName}"
-		# controller = File.open("app/controllers/#{controllerName}", 'r')
+
+		# edits the controller name for use in the File
 		nameSliced = controllerName.slice(0..(controllerName.index('_') -1))
 		doc << "  /#{nameSliced}:\n"
+
 		File.open("app/controllers/#{controllerName}", 'r') do |c|
 			@show = false
 			c.each_line do |line|
 				if line.include? "def index"
-					puts "#{controllerName} contains index"
-					doc << "    get:\n"
-					doc << "      description:\n"
+					@helper.doIndex(nameSliced, controllerName, doc)
 				elsif line.include? "def create"
-					puts "#{controllerName} contains new"
-					doc << "    post:\n"
-					doc << "      description:\n"
+					@helper.doCreate(nameSliced, controllerName, doc)
 				elsif line.include? "def show"
 					@show = true
 				end
 			end # end each_line do block
 			if @show
-				puts "#{controllerName} contains show"
-				doc << "  /#{nameSliced}/:id\n"
+				@helper.doShow(nameSliced, controllerName, doc)
 			end
-		end # end File.open do block
-		puts "Closed file." # closed automatically
-	end
+		end # end File.open do block (File is closed automatically)
+	end # end analyzeController
 
 	# lists controller paths by reading app/controllers directory
 	def self.writePaths
-    	puts "Writing paths."
+    puts "Writing paths."
 		begin
-		doc = File.open("doc.yml", 'w')
-		doc << "info: Generated with Swag.\n"
-		doc << "paths:\n"
-		Dir.foreach("app/controllers") do |c|
-			unless (c == "." || c == ".." || c == "concerns" ||
-				c == "application_controller.rb")
-				analyzeController(c, doc)
+			# creates directory for swag to use
+			Dir.mkdir("swagGem") unless File.exists?("swagGem")
+			doc = File.open("swagGem/api.yml", 'w')
+
+			# sets up doc w/ config info
+			@helper.checkConfig(doc)
+
+			Dir.foreach("app/controllers") do |c|
+				unless (c == "." || c == ".." || c == "concerns" ||
+					c == "application_controller.rb")
+					analyzeController(c, doc)
+				end
 			end
-		end
-	  doc.close
-		end
-	end
-end
+	  	doc.close
+			rescue => ex
+				puts "Error while writing paths."
+				puts ex.inspect
+				puts ex.backtrace
+		end # end begin block
+	end # end writePaths
+end # end Class
