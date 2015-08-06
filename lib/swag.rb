@@ -70,8 +70,8 @@ class Swag
     puts "Writing paths."
 		begin
 			# creates directory for swag to use
-			Dir.mkdir("swagGem") unless File.exists?("swagGem")
-			doc = File.open("swagGem/api.yml", 'w')
+			Dir.mkdir("swag") unless File.exists?("swag")
+			doc = File.open("swag/api.yml", 'w')
 
 			# sets up doc w/ config info
 			@helper.checkConfig(doc)

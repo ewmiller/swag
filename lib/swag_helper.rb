@@ -6,7 +6,7 @@ class SwagHelper
   end
 
   def readConfig(doc)
-    File.open("swagGem/config.yml", 'r') do |c|
+    File.open("swag/config.yml", 'r') do |c|
       c.each_line do |line|
         doc << "#{line}"
       end # end each line block
@@ -14,7 +14,7 @@ class SwagHelper
   end
 
   def writeConfig
-    config = File.open("swagGem/config.yml", 'w')
+    config = File.open("swag/config.yml", 'w')
     config << "swag: #{SWAG_VERSION}\n"
     config << "info:\n"
     config << "  version:\n"
@@ -37,7 +37,7 @@ class SwagHelper
     # open config file (if it exists)
     # read line-by-line
     # write relevant information to doc
-    if File.exists?("swagGem/config.yml")
+    if File.exists?("swag/config.yml")
       readConfig(doc)
     else
       writeConfig
