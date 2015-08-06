@@ -15,7 +15,7 @@ class SwagHelper
 
   def writeConfig
     config = File.open("swag/config.yml", 'w')
-    config << "swag: #{SWAG_VERSION}\n"
+    config << "swag: '#{SWAG_VERSION}'\n"
     config << "info:\n"
     config << "  version:\n"
     config << "  title: #{File.basename(Dir.getwd)}\n"
@@ -47,9 +47,8 @@ class SwagHelper
 
   # prints index info to open YAML File 'doc'
   def doIndex(nameSliced, controllerName, doc)
-    # puts "#{controllerName} contains index"
     doc << "    get:\n"
-    doc << "      description: returns an index for this resource.\n"
+    doc << "      description: returns an index for #{nameSliced}.\n"
     doc << "      produces:\n"
     doc << "      parameters:\n"
     doc << "      responses:\n"
@@ -62,9 +61,8 @@ class SwagHelper
   end
 
   def doCreate(nameSliced, controllerName, doc)
-    # puts "#{controllerName} contains new"
     doc << "    post:\n"
-    doc << "      description: creates a new instance of this resource.\n"
+    doc << "      description: creates a new #{nameSliced} instance.\n"
     doc << "      produces:\n"
     doc << "      parameters:\n"
     doc << "      responses:\n"

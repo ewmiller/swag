@@ -37,6 +37,28 @@ class Swag
 		end # end begin
 	end # end checkControllers
 
+	def self.checkRoutes
+		if !File.exists?("config/routes.rb")
+			puts "Could not find config/routes.rb. Aborting."
+			abort
+		else
+			puts "Found config/routes.rb. Proceeding."
+		end
+	end
+
+	# checks config info
+  def self.checkConfig(doc)
+    # open config file (if it exists)
+    # read line-by-line
+    # write relevant information to doc
+    if File.exists?("swag/config.yml")
+      @helper.readConfig(doc)
+    else
+      @helper.writeConfig
+      @helper.readConfig(doc)
+    end
+  end
+
 	# writes specific controller's routes (helper for self.writePaths)
 	# 'controllerName' is the controller's name, 'doc' is the open File
 	def self.analyzeController(controllerName, doc)
@@ -74,7 +96,7 @@ class Swag
 			doc = File.open("swag/api.yml", 'w')
 
 			# sets up doc w/ config info
-			@helper.checkConfig(doc)
+			checkConfig(doc)
 
 			Dir.foreach("app/controllers") do |c|
 				unless (c == "." || c == ".." || c == "concerns" ||
