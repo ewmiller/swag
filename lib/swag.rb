@@ -1,6 +1,7 @@
 require_relative 'swag_helper.rb'
 require_relative 'global_vars.rb'
 
+
 class Swag
 
 	@helper = SwagHelper.new
@@ -43,6 +44,7 @@ class Swag
 			abort
 		else
 			puts "Found config/routes.rb. Proceeding."
+			@helper.doRoutes
 		end
 	end
 

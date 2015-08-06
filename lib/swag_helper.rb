@@ -32,6 +32,18 @@ class SwagHelper
     config.close
   end
 
+  def doRoutes
+    routeDoc = File.open("config/routes.rb", 'r') do |r|
+      r.each_line do |line|
+        if line.include? "resources :"
+          puts "read line"
+          # puts line unless line.include? " # "
+        else
+        end
+      end # end each_line
+    end #close File
+  end
+
   # prints index info to open YAML File 'doc'
   def doIndex(nameSliced, controllerName, doc)
     doc << "    get:\n"

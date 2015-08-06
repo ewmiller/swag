@@ -1,8 +1,8 @@
 #! /usr/bin/env ruby
 
 require 'swag'
-puts Swag.hi
-puts Swag.checkDir
-puts Swag.checkControllers
-puts Swag.checkRoutes
-puts Swag.writePaths
+Swag.hi
+Swag.checkDir
+Swag.checkControllers
+Swag.checkRoutes
+Swag.writePaths
