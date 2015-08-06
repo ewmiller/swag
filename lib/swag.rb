@@ -13,7 +13,7 @@ class Swag
 	end
 
 	# verifies rails directory
-	def self.check
+	def self.checkDir
 		puts "Checking your directory: #{Dir.pwd}"
     	if File.exist?("bin/rails")
     		puts "Rails App detected. Proceeding."

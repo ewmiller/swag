@@ -32,19 +32,6 @@ class SwagHelper
     config.close
   end
 
-  # checks config info
-  def checkConfig(doc)
-    # open config file (if it exists)
-    # read line-by-line
-    # write relevant information to doc
-    if File.exists?("swag/config.yml")
-      readConfig(doc)
-    else
-      writeConfig
-      readConfig(doc)
-    end
-  end
-
   # prints index info to open YAML File 'doc'
   def doIndex(nameSliced, controllerName, doc)
     doc << "    get:\n"

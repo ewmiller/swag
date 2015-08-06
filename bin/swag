@@ -2,7 +2,7 @@
 
 require 'swag'
 puts Swag.hi
-puts Swag.check
+puts Swag.checkDir
 puts Swag.checkControllers
 puts Swag.checkRoutes
 puts Swag.writePaths
