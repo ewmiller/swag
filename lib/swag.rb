@@ -39,13 +39,23 @@ class Swag
 	end # end checkControllers
 
 	def self.checkRoutes
+		@resources = []
 		if !File.exists?("config/routes.rb")
 			puts "Could not find config/routes.rb. Aborting."
 			abort
 		else
 			puts "Found config/routes.rb. Proceeding."
-			@resources = @helper.doRoutes
-		end
+			# @helper.doRoutes
+	    routeDoc = File.open("config/routes.rb", 'r') do |r|
+	      r.each_line do |line|
+	        if line.include? "resources :"
+	          puts line unless line.include? " # "
+	          @resources.push line
+	        else
+	        end # end if/else
+	      end # end each_line
+	    end # close File
+		end # end if/else
 	end
 
 	# checks config info

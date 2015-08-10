@@ -32,18 +32,19 @@ class SwagHelper
     config.close
   end
 
-  def doRoutes
-    @resources = []
-    routeDoc = File.open("config/routes.rb", 'r') do |r|
-      r.each_line do |line|
-        if line.include? "resources :"
-          puts line unless line.include? " # "
-          @resources.push line
-        else
-        end
-      end # end each_line
-    end #close File
-  end
+  # moved this back to swag.rb
+  # def doRoutes
+  #   @resources = []
+  #   routeDoc = File.open("config/routes.rb", 'r') do |r|
+  #     r.each_line do |line|
+  #       if line.include? "resources :"
+  #         puts line unless line.include? " # "
+  #         @resources.push line
+  #       else
+  #       end
+  #     end # end each_line
+  #   end #close File
+  # end
 
   # prints index info to open YAML File 'doc'
   def doIndex(nameSliced, controllerName, doc)
