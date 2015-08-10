@@ -33,11 +33,12 @@ class SwagHelper
   end
 
   def doRoutes
+    @resources = []
     routeDoc = File.open("config/routes.rb", 'r') do |r|
       r.each_line do |line|
         if line.include? "resources :"
-          puts "read line"
-          # puts line unless line.include? " # "
+          puts line unless line.include? " # "
+          @resources.push line
         else
         end
       end # end each_line

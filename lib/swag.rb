@@ -44,7 +44,7 @@ class Swag
 			abort
 		else
 			puts "Found config/routes.rb. Proceeding."
-			@helper.doRoutes
+			@resources = @helper.doRoutes
 		end
 	end
 
