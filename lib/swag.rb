@@ -110,6 +110,10 @@ class Swag
 			# sets up doc w/ config info
 			checkConfig(doc)
 
+			# use the @resources array here
+			# for each entry in @resources, find the controller name mentioned.
+			# then use that controller name to call analyzeController?
+
 			Dir.foreach("app/controllers") do |c|
 				unless (c == "." || c == ".." || c == "concerns" ||
 					c == "application_controller.rb")
