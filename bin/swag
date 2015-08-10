@@ -2,7 +2,4 @@
 
 require 'swag'
 Swag.hi
-Swag.checkDir
-Swag.checkControllers
-Swag.checkRoutes
-Swag.writePaths
+Swag.checkConfig

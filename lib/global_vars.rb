@@ -1,1 +1,1 @@
-SWAG_VERSION = '0.2.1'
+SWAG_VERSION = '0.3.0'
