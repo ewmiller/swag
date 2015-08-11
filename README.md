@@ -12,18 +12,6 @@ process of writing YAML files for that purpose. From within a Rails app, a user 
 able to enter ```swag``` in the command line, and Swag will figure out their app's
 functionality. A YAML file will be generated to describe the results.
 
-## Running Locally
-To install the latest published version, simply run ```gem install swag```. To build
-and run from the directory, do the following:
-
-    gem build swag.gemspec
-    gem install ./swag-*.gem
-
-Once you have swag installed, navigate to a Rails directory and simply run ```swag```.
-Results will be stored in a directory called ```swagGem```. A default config.yml
-file will be generated on the first run - users can (and should) edit this file
-with custom meta information about their app.
-
 ## Build Scripts (for gem development)
 This repository includes ```spec.sh```, a bash script for automatically updating the version and
 date information in the ```swag.gemspec``` file, as well as ```rebuild.sh```, to quicken
