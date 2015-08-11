@@ -15,10 +15,9 @@ class Swag
 			puts "Config file already exists. Proceeding."
 		else
 			Dir.mkdir("swag")
-			@helper.writeConfig
+			@helper.makeConfig
 			puts "created swag/config.yml"
 		end
 	end
-
 
 end # end Class

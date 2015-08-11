@@ -13,7 +13,7 @@ class SwagHelper
     end # close File block
   end
 
-  def writeConfig
+  def makeConfig
     config = File.open("swag/config.yml", 'w')
     config << "swag: '#{SWAG_VERSION}'\n"
     config << "info:\n"
@@ -24,10 +24,10 @@ class SwagHelper
     config << "      name:\n"
     config << "      contact:\n"
     config << "  license:\n"
+    config << "host: localhost:3000\n"
+    config << "basepath: /\n"
     config << "schemes:\n"
     config << "  - http\n"
-    config << "consumes:\n"
-    config << "produces:\n"
     config << "paths:\n"
     config.close
   end
