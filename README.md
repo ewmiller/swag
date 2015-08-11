@@ -1,6 +1,7 @@
 # swag
-A Ruby gem for generating YAML from within Rails apps, in the style of
-[Swagger](http://swagger.io/).
+A Ruby gem for generating [Swagger](http://swagger.io/)-style YAML to describe
+any API.
+
 
 Current status: under development. The latest (published) version of swag can be found on
 [rubygems.org/gems/swag](http://rubygems.org/gems/swag).
