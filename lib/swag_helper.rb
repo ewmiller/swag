@@ -1,4 +1,6 @@
+require_relative 'swag.rb'
 require_relative 'vars.rb'
+require 'yaml'
 
 class SwagHelper
 
