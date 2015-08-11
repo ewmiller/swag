@@ -19,7 +19,7 @@ and getting user input from the command line. On swag's first run, it will creat
 a ```swag``` directory and populate it with a file called ```config.yml```. Then
 the config will need to be populated with certain information, including:
 
- - the API's base URL
+ - the API's base URL (default is localhost:3000)
  - paths to different resources (e.g. users, blog articles, etc.)
  - meta info such as the API's title, author, version, etc.
 

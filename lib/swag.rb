@@ -12,13 +12,13 @@ class Swag
 
 	def self.config
 		if File.exist?("swag/config.yml")
-			puts "Found config file. Proceeding."
+			puts "Config file already exists. Proceeding."
 		else
 			Dir.mkdir("swag")
 			@helper.writeConfig
-			puts "wrote to swag/config.yml"
+			puts "created swag/config.yml"
 		end
 	end
 
-	
+
 end # end Class

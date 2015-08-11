@@ -18,7 +18,7 @@ class SwagHelper
     config << "swag: '#{SWAG_VERSION}'\n"
     config << "info:\n"
     config << "  version:\n"
-    config << "  title: #{}\n"
+    config << "  title: #{File.basename(Dir.pwd)}\n"
     config << "  description: an API.\n"
     config << "  author:\n"
     config << "      name:\n"
