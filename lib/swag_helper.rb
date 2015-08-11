@@ -1,4 +1,4 @@
-require_relative 'global_vars.rb'
+require_relative 'vars.rb'
 
 class SwagHelper
 
@@ -6,7 +6,7 @@ class SwagHelper
   end
 
   def readConfig(doc)
-    File.open("swag/config.yml", 'r') do |c|
+    File.open("swag/config.rb", 'r') do |c|
       c.each_line do |line|
         doc << "#{line}"
       end # end each line block
@@ -14,7 +14,7 @@ class SwagHelper
   end
 
   def makeConfig
-    config = File.open("swag/config.yml", 'w')
+    config = File.open("swag/config.rb", 'w')
     config << "swag: '#{SWAG_VERSION}'\n"
     config << "info:\n"
     config << "  version:\n"

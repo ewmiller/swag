@@ -1,5 +1,5 @@
 require_relative 'swag_helper.rb'
-require_relative 'global_vars.rb'
+require_relative 'vars.rb'
 
 
 class Swag
@@ -11,12 +11,13 @@ class Swag
 	end
 
 	def self.config
-		if File.exist?("swag/config.yml")
+		puts "Starting configuration..."
+		if File.exist?("swag/config.rb")
 			puts "Config file already exists. Proceeding."
 		else
 			Dir.mkdir("swag")
 			@helper.makeConfig
-			puts "created swag/config.yml"
+			puts "Created swag/config.rb"
 		end
 	end
 
