@@ -2,4 +2,4 @@
 
 require 'swag'
 Swag.hi
-Swag.checkConfig
+Swag.config
