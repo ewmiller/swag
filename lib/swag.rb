@@ -12,18 +12,17 @@ class Swag
 
 	def self.config
 		puts "Starting configuration..."
-		if File.exist?("swag/config.rb")
+		if File.exist?("swag/config.yml")
 			puts "Config file already exists. Proceeding."
 		else
 			Dir.mkdir("swag")
 			@helper.makeConfig
-			puts "Created swag/config.rb"
-			puts "Please edit swag/config.rb to include your API's paths."
+			puts "Created swag/config.yml"
+			puts "Please edit swag/config.yml to include your API's paths."
 			puts "List them under the provided \"paths:\" section using YAML formatting."
-			puts "Also be sure to edit the other default information. This is crucial\n
+			puts "Also be sure to edit the other default information. This is crucial
 			in order for swag to work properly!"
-			puts "If no paths are provided, only the root path / \n
-			will be documented."
+			puts "If no paths are provided, only the root path / will be documented."
 			puts "Run 'swag' again when ready. Aborting."
 			abort
 		end
