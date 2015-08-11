@@ -1,6 +1,5 @@
 # swag
-A Ruby gem for generating [Swagger](http://swagger.io/)-style YAML to describe
-any API.
+A Ruby gem for generating [Swagger](http://swagger.io/)-style API documentation.
 
 
 Current status: under development. The latest (published) version of swag can be found on
@@ -8,9 +7,27 @@ Current status: under development. The latest (published) version of swag can be
 
 ## Overview
 Want an easier way to generate API documentation? The goal of Swag is to automate the
-process of writing YAML files for that purpose. From within a Rails app, a user will be
-able to enter ```swag``` in the command line, and Swag will figure out their app's
-functionality. A YAML file will be generated to describe the results.
+process of writing YAML files for that purpose.
+
+## Usage
+(As development continues, the specifics of usage may change. Some of these
+features may or may not be implemented yet):
+
+Swag will need the user's help in order to figure out how an API works and
+document it. This will most likely be a combination of reading a config file
+and getting user input from the command line. On swag's first run, it will create
+a ```swag``` directory and populate it with a file called ```config.yml```. Then
+the config will need to be populated with certain information, including:
+
+ - the API's base URL
+ - paths to different resources (e.g. users, blog articles, etc.)
+ - meta info such as the API's title, author, version, etc.
+
+Alternatively, a user can call ```swag``` on individual resources. For example,
+calling ```swag users``` from the command line will generate documentation for
+*only* the ```users``` resource of the API.
+
+The swag output will be saved to the ```swag``` directory as YAML files.
 
 ## Build Scripts (for gem development)
 This repository includes ```spec.sh```, a bash script for automatically updating the version and

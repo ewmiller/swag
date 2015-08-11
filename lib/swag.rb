@@ -19,4 +19,6 @@ class Swag
 			puts "wrote to swag/config.yml"
 		end
 	end
+
+	
 end # end Class
