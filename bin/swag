@@ -3,3 +3,4 @@
 require 'swag'
 Swag.hi
 Swag.config
+Swag.write

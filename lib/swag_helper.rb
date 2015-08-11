@@ -6,24 +6,35 @@ class SwagHelper
   end
 
   def readConfig(doc)
-    File.open("swag/config.rb", 'r') do |c|
-      c.each_line do |line|
-        doc << "#{line}"
-      end # end each line block
-    end # close File block
+    # read config.yml in as a Ruby hash. Populate doc with appropriate info.
+    config = YAML.load_file('swag/config.yml')
+    doc << "swag: '#{config[:swag]}'\n"
+    doc << "info:\n"
+    doc << "  version: #{config[:info[:version]]}\n"
+    doc << "  title: #{config[:info[:title]]}\n"
+    doc << "  description: #{config[:info[:description]]}\n"
+    doc << "  author:\n"
+    doc << "      name: Example\n"
+    doc << "      contact: example@example.com\n"
+    doc << "  license: BSD 3-Clause\n"
+    doc << "host: localhost:3000\n"
+    doc << "basepath: /\n"
+    doc << "schemes:\n"
+    doc << "  - http\n"
+    doc << "paths:\n"
   end
 
   def makeConfig
-    config = File.open("swag/config.rb", 'w')
+    config = File.open("swag/config.yml", 'w')
     config << "swag: '#{SWAG_VERSION}'\n"
     config << "info:\n"
     config << "  version:\n"
     config << "  title: #{File.basename(Dir.pwd)}\n"
     config << "  description: an API.\n"
     config << "  author:\n"
-    config << "      name:\n"
-    config << "      contact:\n"
-    config << "  license:\n"
+    config << "      name: Example\n"
+    config << "      contact: example@example.com\n"
+    config << "  license: BSD 3-Clause\n"
     config << "host: localhost:3000\n"
     config << "basepath: /\n"
     config << "schemes:\n"

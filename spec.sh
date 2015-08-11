@@ -15,4 +15,4 @@ echo "Gem::Specification.new do |s|
   s.executables << 'swag'
   end" > swag.gemspec
 
-echo "SWAG_VERSION = '$version'" > lib/global_vars.rb
+echo "SWAG_VERSION = '$version'" > lib/vars.rb
