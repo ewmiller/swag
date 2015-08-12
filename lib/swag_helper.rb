@@ -45,15 +45,19 @@ class SwagHelper
   #   doc << "          schema:\n"
   # end
 
-  def doGet
-
+  def doGet(fullPath)
+    puts "Sending an http get request to #{fullPath}. Returning a hash."
+    return $DEFAULT_GET
   end
 
   def doPath(arg, @config)
     input = {
       "#{arg}" => {
-        # content of path goes here
-      }
+        "get" => {},
+        "post" => {},
+        "patch" => {},
+        "delete" => {},
+      },
     }
     fullPath = "#{@config["host"]}#{@config["basepath"]}#{arg}"
     input["paths"]["#{arg}"] = doGet(fullPath)
