@@ -29,7 +29,7 @@ $DEFAULT_GET = {
       },
       "default" => {
         "description" => "unexpected error",
-        "schema" => "",
+        "schema" => [],
       },
     },
   },
@@ -47,7 +47,7 @@ $DEFAULT_POST = {
       },
       "default" => {
         "description" => "unexpected error",
-        "schema" => "",
+        "schema" => [],
       },
     },
   },
