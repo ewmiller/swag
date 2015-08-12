@@ -1,62 +1,68 @@
-require_relative 'global_vars.rb'
+require_relative 'swag.rb'
+require_relative 'vars.rb'
+require 'yaml'
+require 'net/http'
 
 class SwagHelper
 
   def initialize
   end
 
-  def readConfig(doc)
-    File.open("swagGem/config.yml", 'r') do |c|
-      c.each_line do |line|
-        doc << "#{line}"
-      end # end each line block
-    end # close File block
+  def setupApi
+    doc = File.open("swag/api.yml", 'w')
+    # read config.yml in as a Ruby hash. Populate doc with appropriate info.
+    config = YAML.load_file('./swag/config.yml')
+    puts "Loaded config info from swag/config.yml"
+    doc << config.to_yaml
+    puts "Wrote config info to swag/api.yml"
+    doc.close
   end
 
-  def writeConfig
-    config = File.open("swagGem/config.yml", 'w')
-    config << "swag: #{$SWAG_VERSION}\n"
-    config << "info:\n"
-    config << "    version:\n"
-    config << "    title: #{File.basename(Dir.getwd)}\n"
-    config << "    description: a Rails app.\n"
-    config << "    author:\n"
-    config << "        name:\n"
-    config << "        contact:\n"
-    config << "    license:\n"
-    config << "paths:\n"
-    config.close
+  # TODO: leaving this as a reminder to implement the /path/:id path thing yeah
+  # def doShow(nameSliced, controllerName, doc)
+  #   # puts "#{controllerName} contains show"
+  #   doc << "  /#{nameSliced}/:id\n"
+  # end
+
+  def doGet(fullPath)
+    puts "Sending an http get request to #{fullPath}. Returning a hash."
+    return $DEFAULT_GET
   end
 
-  # checks config info
-  def checkConfig(doc)
-    # open config file (if it exists)
-    # read line-by-line
-    # write relevant information to doc
-    if File.exists?("swagGem/config.yml")
-      readConfig(doc)
-    else
-      writeConfig
-      readConfig(doc)
+  def doPath(arg, api)
+    input = {
+      "#{arg}" => {
+        "get" => $DEFAULT_GET,
+        "post" => $DEFAULT_POST,
+        "patch" => {},
+        "delete" => $DEFAULT_DELETE,
+      },
+    }
+    # the path to send to HTTP methods
+    fullPath = "#{api["host"]}#{api["basepath"]}#{arg}"
+
+    # assign the get, post, patch, delete sections for this path
+    # call the HTTP methods from above
+    input["#{arg}"]["get"] = doGet(fullPath)
+    # input["#{arg}"]["post"] = doPost(fullPath)
+    # input["#{arg}"]["patch"] = doPatch(fullPath)
+    # input["#{arg}"]["delete"] = doDelete(fullPath)
+
+    # now that the path info is assigned, combine it with the whole API doc
+    api["paths"]["#{arg}"] = input["#{arg}"]
+
+    # write the final product to swag/api.yml
+    begin
+      doc = File.open("swag/api.yml", 'w')
+      doc << api.to_yaml
+          puts "Wrote api info to swag/api.yml"
+      doc.close
+    rescue Errno::ENOENT => e
+      puts "Error creating file: swag/api.yml"
+      puts e
+    rescue IOError => e
+      puts "Error writing to file: swag/api.yml"
+      puts e
     end
-  end
-
-  # prints index info to open YAML File 'doc'
-  def doIndex(nameSliced, controllerName, doc)
-    puts "#{controllerName} contains index"
-    doc << "    get:\n"
-    doc << "      description: returns an index for this resource.\n"
-  end
-
-  def doCreate(nameSliced, controllerName, doc)
-    puts "#{controllerName} contains new"
-    doc << "    post:\n"
-    singular = controllerName.slice(0..(nameSliced.index('s') -1))
-    doc << "      description: creates a new instance of this resource.\n"
-  end
-
-  def doShow(nameSliced, controllerName, doc)
-    puts "#{controllerName} contains show"
-    doc << "  /#{nameSliced}/:id\n"
   end
 end # end class

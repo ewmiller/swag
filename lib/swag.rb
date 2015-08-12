@@ -1,90 +1,96 @@
 require_relative 'swag_helper.rb'
-require_relative 'global_vars.rb'
+require_relative 'vars.rb'
+
 
 class Swag
 
 	@helper = SwagHelper.new
 
-	def initialize
-	end
-
 	def self.hi
-    	puts "Swag, world."
+		puts "Swag, world."
 	end
 
-	# verifies rails directory
-	def self.check
-		puts "Checking your directory: #{Dir.pwd}"
-    	if File.exist?("bin/rails")
-    		puts "Rails App detected. Proceeding."
-    	else
-    		puts "You must be in a Rails root directory for Swag to work. Aborting."
-    		abort
-    	end
+	def self.usage
+		puts "Usage: swag <command>"
+		puts "Command options: config, <path>, merge"
+		puts "config"
+		puts " - sets up the 'swag' folder in your current directory."
+		puts " - creates 'swag/config.yml' for your API's meta information."
+		puts " - swag/config.yml MUST exist in order for swag to run properly."
+		puts "<path>"
+		puts " - where <path> is a path in your API to document"
+		puts " - for example , 'swag users' will document the /users path"
+		puts " - documentation is generated as swag/<path>-api.yml"
+		# might get rid of the below part
+		# puts "merge"
+		# puts " - generates swag/api.yml, a full documentation of your API."
+		# puts " - reads from all swag/<path>-api.yml files to accomplish this."
+		# puts " - important: you must document each path individually before merging."
 	end
 
-	# checks that app/controllers can be read
-	def self.checkControllers
-    	puts "Checking controllers."
+	def self.config
+		puts "Starting configuration..."
+		if File.exist?("swag/config.yml")
+			puts "Config file already exists."
+		else
+			begin
+				# make swag directory
+				Dir.mkdir("swag") unless Dir.exists?("swag")
+
+				# make config file
+				config = File.open("swag/config.yml", 'w')
+				config << $DEFAULT_CONFIG.to_yaml
+				config.close
+
+				puts "Created swag/config.yml"
+				puts "Please edit swag/config.yml to include your API's meta info."
+				puts "This is important in order for swag to work properly!"
+				puts "Run swag again when ready. Aborting."
+				abort
+			rescue Errno::ENOENT => e
+				puts "Error while making swag/config.yml"
+				puts e
+				puts e.backtrace
+			end # end try/catch
+		end # end if/else
+	end # end method
+
+	def self.merge
 		begin
-			Dir.foreach("app/controllers") do |c|
-					puts "Found #{c}"
-				end
-    		rescue => ex
-    			puts "Error while reading controllers."
-					puts ex.inspect
-					puts ex.backtrace
-		end # end begin
-	end # end checkControllers
+			doc = File.open("swag/api.yml", 'w')
+			@helper.readConfig(doc)
+			doc.close
+		rescue Errno::ENOENT => e
+			puts "Error opening file."
+			puts e
+		rescue IOError => e
+			puts "Error writing to file."
+			puts e
+		end
+	end
 
-	# writes specific controller's routes (helper for self.writePaths)
-	# 'controllerName' is the controller's name, 'doc' is the open File
-	def self.analyzeController(controllerName, doc)
-		puts "Analyzing controller: #{controllerName}"
-
-		# edits the controller name for use in the File
-		nameSliced = controllerName.slice(0..(controllerName.index('_') -1))
-		doc << "  /#{nameSliced}:\n"
-
-		File.open("app/controllers/#{controllerName}", 'r') do |c|
-			@show = false
-			c.each_line do |line|
-				if line.include? "def index"
-					@helper.doIndex(nameSliced, controllerName, doc)
-				elsif line.include? "def create"
-					@helper.doCreate(nameSliced, controllerName, doc)
-				elsif line.include? "def show"
-					@show = true
-				end
-			end # end each_line do block
-			if @show
-				@helper.doShow(nameSliced, controllerName, doc)
-			end
-		end # end File.open do block (File is closed automatically)
-	end # end analyzeController
-
-	# lists controller paths by reading app/controllers directory
-	def self.writePaths
-    puts "Writing paths."
+	def self.path(arg)
+		@helper.setupApi unless File.exist?("swag/api.yml")
 		begin
-			# creates directory for swag to use
-			Dir.mkdir("swagGem") unless File.exists?("swagGem")
-			doc = File.open("swagGem/api.yml", 'w')
-
-			# sets up doc w/ config info
-			@helper.checkConfig(doc)
-
-			Dir.foreach("app/controllers") do |c|
-				unless (c == "." || c == ".." || c == "concerns" ||
-					c == "application_controller.rb")
-					analyzeController(c, doc)
-				end
-			end
-	  	doc.close
-			rescue => ex
-				puts "Error while writing paths."
-				puts ex.inspect
-				puts ex.backtrace
-		end # end begin block
-	end # end writePaths
+			api = YAML.load_file('./swag/api.yml')
+			puts api
+			puts "Path to explore: #{api["host"]}#{api["basepath"]}#{arg}"
+		rescue Errno::ENOENT => e
+			puts "Error loading swag/api.yml. Make sure it is configured properly."
+			puts e
+			puts e.backtrace
+		end
+		puts "Is this correct? [y/n]:"
+		answer = STDIN.gets.chomp
+		if answer.downcase == "y"
+			@helper.doPath(arg, api)
+		elsif answer == ""
+			puts "yes"
+			@helper.doPath(arg, api)
+		elsif answer.downcase == "n"
+			puts "Please try again."
+		else
+			puts "Please try again."
+		end
+	end # end method
 end # end Class

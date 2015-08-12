@@ -1,7 +1,15 @@
 #! /usr/bin/env ruby
 
 require 'swag'
-puts Swag.hi
-puts Swag.check
-puts Swag.checkControllers
-puts Swag.writePaths
+Swag.hi
+if ARGV[0] == nil
+  Swag.usage
+elsif ARGV[1]
+  Swag.usage
+elsif ARGV[0] == "config"
+  Swag.config
+elsif ARGV[0] == "merge"
+  Swag.merge
+else
+  Swag.path(ARGV[0])
+end
