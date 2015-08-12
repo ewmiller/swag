@@ -21,28 +21,36 @@ class Swag
 		puts " - where <path> is a path in your API to document"
 		puts " - for example , 'swag users' will document the /users path"
 		puts " - documentation is generated as swag/<path>-api.yml"
-		puts "merge"
-		puts " - generates swag/api.yml, a full documentation of your API."
-		puts " - reads from all swag/<path>-api.yml files to accomplish this."
-		puts " - important: you must document each path individually before merging."
+		# might get rid of the below part
+		# puts "merge"
+		# puts " - generates swag/api.yml, a full documentation of your API."
+		# puts " - reads from all swag/<path>-api.yml files to accomplish this."
+		# puts " - important: you must document each path individually before merging."
 	end
 
 	def self.config
 		puts "Starting configuration..."
 		if File.exist?("swag/config.yml")
-			puts "Config file already exists. Proceeding."
+			puts "Config file already exists."
 		else
 			begin
-				Dir.mkdir("swag")
-				@helper.makeConfig
+				# make swag directory
+				Dir.mkdir("swag") unless Dir.exists?("swag")
+
+				# make config file
+				config = File.open("swag/config.yml", 'w')
+				config << $DEFAULT_CONFIG.to_yaml
+				config.close
+
 				puts "Created swag/config.yml"
 				puts "Please edit swag/config.yml to include your API's meta info."
 				puts "This is important in order for swag to work properly!"
 				puts "Run swag again when ready. Aborting."
 				abort
 			rescue Errno::ENOENT => e
-				puts "Error making directory."
+				puts "Error while making swag/config.yml"
 				puts e
+				puts e.backtrace
 			end # end try/catch
 		end # end if/else
 	end # end method
@@ -67,16 +75,17 @@ class Swag
 			api = YAML.load_file('./swag/api.yml')
 			puts "Path to explore: #{api["host"]}#{api["basepath"]}#{arg}"
 		rescue Errno::ENOENT => e
-			puts "Error reading api file. Make sure you run 'swag config'."
+			puts "Error loading swag/api.yml. Make sure it is configured properly."
 			puts e
+			puts e.backtrace
 		end
 		puts "Is this correct? [y/n]:"
 		answer = STDIN.gets.chomp
 		if answer.downcase == "y"
-			@helper.doPath(arg, config)
+			@helper.doPath(arg, api)
 		elsif answer == ""
 			puts "yes"
-			@helper.doPath(arg, config)
+			@helper.doPath(arg, api)
 		elsif answer.downcase == "n"
 			puts "Please try again."
 		else
