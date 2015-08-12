@@ -9,13 +9,13 @@ class SwagHelper
   end
 
   def setupApi
-    doc = File.open("swag/api.yml", 'w') do
-      # read config.yml in as a Ruby hash. Populate doc with appropriate info.
-      config = YAML.load_file('./swag/config.yml')
-      puts "Loaded config info from swag/config.yml"
-      doc << config.to_yaml
-      puts "Wrote config info to swag/api.yml"
-    end
+    doc = File.open("swag/api.yml", 'w')
+    # read config.yml in as a Ruby hash. Populate doc with appropriate info.
+    config = YAML.load_file('./swag/config.yml')
+    puts "Loaded config info from swag/config.yml"
+    doc << config.to_yaml
+    puts "Wrote config info to swag/api.yml"
+    doc.close
   end
 
   # TODO: leaving this as a reminder to implement the /path/:id path thing yeah
