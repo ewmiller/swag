@@ -26,23 +26,6 @@ class SwagHelper
   # def doShow(nameSliced, controllerName, doc)
   #   # puts "#{controllerName} contains show"
   #   doc << "  /#{nameSliced}/:id\n"
-  #   doc << "    get:\n"
-  #   doc << "      description: returns a specific #{} item by id.\n"
-  #   doc << "      produces:\n"
-  #   doc << "      parameters:\n"
-  #   doc << "        - name: id\n"
-  #   doc << "          in: path\n"
-  #   doc << "          description: id of specific #{} object\n"
-  #   doc << "          required: true\n"
-  #   doc << "          type: integer\n"
-  #   doc << "          format:\n"
-  #   doc << "      responses:\n"
-  #   doc << "        200:\n"
-  #   doc << "          description: #{} response\n"
-  #   doc << "          schema:\n"
-  #   doc << "        default:\n"
-  #   doc << "          description: unexpected error\n"
-  #   doc << "          schema:\n"
   # end
 
   def doGet(fullPath)
@@ -53,14 +36,14 @@ class SwagHelper
   def doPath(arg, @config)
     input = {
       "#{arg}" => {
-        "get" => {},
-        "post" => {},
+        "get" => $DEFAULT_GET,
+        "post" => $DEFAULT_POST,
         "patch" => {},
-        "delete" => {},
+        "delete" => $DEFAULT_DELETE,
       },
     }
     fullPath = "#{@config["host"]}#{@config["basepath"]}#{arg}"
-    input["paths"]["#{arg}"] = doGet(fullPath)
+    input["#{arg}"]["get"] = doGet(fullPath)
     begin
       doc = File.open("swag/#{arg}-api.yml", 'w')
         config = YAML.load_file("swag/config.yml")
