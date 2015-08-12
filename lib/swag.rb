@@ -75,7 +75,7 @@ class Swag
 			@helper.doPath(arg, config)
 		elsif answer == ""
 			puts "yes"
-			@helper.doPath(arg)
+			@helper.doPath(arg, config)
 		elsif answer.downcase == "n"
 			puts "Please try again."
 		else
