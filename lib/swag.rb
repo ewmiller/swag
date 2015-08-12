@@ -33,20 +33,34 @@ class Swag
 		if File.exist?("swag/config.yml")
 			puts "Config file already exists. Proceeding."
 		else
-			Dir.mkdir("swag")
-			@helper.makeConfig
-			puts "Created swag/config.yml"
-			puts "Please edit swag/config.yml to include your API's meta info."
-			puts "This is important in order for swag to work properly!"
-			puts "Run 'swag' again when ready. Aborting."
-			abort
+			begin
+				Dir.mkdir("swag")
+				@helper.makeConfig
+				puts "Created swag/config.yml"
+				puts "Please edit swag/config.yml to include your API's meta info."
+				puts "This is important in order for swag to work properly!"
+				puts "Run 'swag' again when ready. Aborting."
+				abort
+			rescue Errno:ENOENT => e
+				puts "Error making directory."
+				puts e
+			end
+			end
 		end
 	end
 
 	def self.merge
-		doc = File.open("swag/api.yml", 'w')
-		@helper.readConfig(doc)
-		doc.close
+		begin
+			doc = File.open("swag/api.yml", 'w')
+			@helper.readConfig(doc)
+			doc.close
+		rescue Errno:ENOENT => e
+			puts "Error opening file."
+			puts e
+		rescue IOError => e
+			puts "Error writing to file."
+			puts e
+		end
 	end
 
 	def self.path(arg)
