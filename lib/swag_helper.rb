@@ -33,7 +33,7 @@ class SwagHelper
     return $DEFAULT_GET
   end
 
-  def doPath(arg, config)
+  def doPath(arg, api)
     input = {
       "#{arg}" => {
         "get" => $DEFAULT_GET,
@@ -42,20 +42,30 @@ class SwagHelper
         "delete" => $DEFAULT_DELETE,
       },
     }
-    fullPath = "#{config["host"]}#{config["basepath"]}#{arg}"
+    # the path to send to HTTP methods
+    fullPath = "#{api["host"]}#{api["basepath"]}#{arg}"
+
+    # assign the get, post, patch, delete sections for this path
     input["#{arg}"]["get"] = doGet(fullPath)
+    # input["#{arg}"]["post"] = doPost(fullPath)
+    # input["#{arg}"]["patch"] = doPatch(fullPath)
+    # input["#{arg}"]["delete"] = doDelete(fullPath)
+
+    # now that the path info is assigned, combine it with the whole API doc
+    api["paths"]["#{arg}"] = input["#{arg}"]
+
+    # write the final product to swag/api.yml
     begin
-      doc = File.open("swag/#{arg}-api.yml", 'w')
-        config = YAML.load_file("swag/config.yml")
-        doc << config.to_yaml
-        puts "Wrote config info to swag/#{arg}-api.yml"
-        doc << input.to_yaml
-        puts "Wrote path info to swag/#{arg}-api.yml"
-      doc.close
+      doc = File.open("swag/api.yml", 'w') do
+          doc << api.to_yaml
+          puts "Wrote api info to swag/api.yml"
+      end
     rescue Errno::ENOENT => e
-      puts "Error while creating swag/#{arg}-api.yml"
+      puts "Error creating file: swag/api.yml"
       puts e
-      puts "Make sure you run 'swag config' if you haven't yet."
+    rescue IOError => e
+      puts "Error writing to file: swag/api.yml"
+      puts e
     end
   end
 end # end class
