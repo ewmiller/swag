@@ -8,12 +8,14 @@ class SwagHelper
   def initialize
   end
 
-  def readConfig(doc)
-    # read config.yml in as a Ruby hash. Populate doc with appropriate info.
-    config = YAML.load_file('swag/config.yml')
-    puts "Loaded config info from swag/config.yml"
-    doc << config.to_yaml
-    puts "Wrote config info to swag/api.yml"
+  def setupApi
+    doc = File.open("swag/api.yml", 'w') do
+      # read config.yml in as a Ruby hash. Populate doc with appropriate info.
+      config = YAML.load_file('swag/config.yml')
+      puts "Loaded config info from swag/config.yml"
+      doc << config.to_yaml
+      puts "Wrote config info to swag/api.yml"
+    end
   end
 
   def makeConfig

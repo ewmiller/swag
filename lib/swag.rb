@@ -62,11 +62,12 @@ class Swag
 	end
 
 	def self.path(arg)
+		@helper.setupApi unless File.exist?("swag/api.yml")
 		begin
-			config = YAML.load_file('./swag/config.yml')
-			puts "Path to explore: #{config["host"]}#{config["basepath"]}#{arg}"
+			api = YAML.load_file('./swag/api.yml')
+			puts "Path to explore: #{api["host"]}#{api["basepath"]}#{arg}"
 		rescue Errno::ENOENT => e
-			puts "Error reading config file. Make sure you run 'swag config'."
+			puts "Error reading api file. Make sure you run 'swag config'."
 			puts e
 		end
 		puts "Is this correct? [y/n]:"
