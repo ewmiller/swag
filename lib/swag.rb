@@ -19,10 +19,8 @@ class Swag
 			Dir.mkdir("swag")
 			@helper.makeConfig
 			puts "Created swag/config.yml"
-			puts "Please edit swag/config.yml to include your API's paths."
-			puts "List them under the provided \"paths:\" section using YAML formatting."
-			puts "Also be sure to edit the other default information. This is crucial in order for swag to work properly!"
-			puts "If no paths are provided, only the root path / will be documented."
+			puts "Please edit swag/config.yml to include your API's meta info."
+			puts "This is important in order for swag to work properly!"
 			puts "Run 'swag' again when ready. Aborting."
 			abort
 		end
