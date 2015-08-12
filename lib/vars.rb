@@ -19,61 +19,55 @@ $DEFAULT_CONFIG = {
 }
 
 $DEFAULT_GET = {
-  "get" => {
-    "description" => "",
-    "produces" => "",
-    "parameters" => "",
-    "responses" => {
-      "200:" => {
-        "description" => "",
-        "schema" => "",
-      },
-      "default" => {
-        "description" => "unexpected error",
-        "schema" => [],
-      },
+  "description" => "",
+  "produces" => "",
+  "parameters" => "",
+  "responses" => {
+    "200:" => {
+      "description" => "",
+      "schema" => "",
+    },
+    "default" => {
+      "description" => "unexpected error",
+      "schema" => [],
     },
   },
 }
 
 $DEFAULT_POST = {
-  "post" => {
-    "description" => "",
-    "produces" => "",
-    "parameters" => [],
-    "responses" => {
-      "200:" => {
-        "description" => "",
-        "schema" => [],
-      },
-      "default" => {
-        "description" => "unexpected error",
-        "schema" => [],
-      },
+  "description" => "",
+  "produces" => "",
+  "parameters" => [],
+  "responses" => {
+    "200:" => {
+      "description" => "",
+      "schema" => [],
+    },
+    "default" => {
+      "description" => "unexpected error",
+      "schema" => [],
     },
   },
 }
 
 $DEFAULT_DELETE = {
-  "post" => {
-    "description" => "",
-    "produces" => "",
-    "parameters" => [{
-      "name" => "id",
-      "in" => "path",
-      "description" => "id of entry to be deleted."
-      "required" => "true"
-      "type" => "integer"
-      }],
-    "responses" => {
-      "200:" => {
-        "description" => "",
-        "schema" => [],
-      },
-      "default" => {
-        "description" => "unexpected error",
-        "schema" => "",
-      },
+  "description" => "",
+  "produces" => "",
+  "parameters" => [{
+    "name" => "id",
+    "in" => "path",
+    "description" => "id of entry to be deleted."
+    "required" => "true"
+    "type" => "integer"
+    }],
+  "responses" => {
+    "200:" => {
+      "description" => "",
+      "schema" => [],
+    },
+    "default" => {
+      "description" => "unexpected error",
+      "schema" => "",
     },
   },
 }
