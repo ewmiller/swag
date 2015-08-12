@@ -4,6 +4,8 @@ require 'swag'
 Swag.hi
 if ARGV[0] == nil
   Swag.usage
+elsif ARGV[1]
+  Swag.usage
 elsif ARGV[0] == "config"
   Swag.config
 elsif ARGV[0] == "merge"
