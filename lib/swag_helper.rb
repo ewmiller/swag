@@ -33,7 +33,7 @@ class SwagHelper
     return $DEFAULT_GET
   end
 
-  def doPath(arg, @config)
+  def doPath(arg, config)
     input = {
       "#{arg}" => {
         "get" => $DEFAULT_GET,
@@ -42,7 +42,7 @@ class SwagHelper
         "delete" => $DEFAULT_DELETE,
       },
     }
-    fullPath = "#{@config["host"]}#{@config["basepath"]}#{arg}"
+    fullPath = "#{config["host"]}#{config["basepath"]}#{arg}"
     input["#{arg}"]["get"] = doGet(fullPath)
     begin
       doc = File.open("swag/#{arg}-api.yml", 'w')

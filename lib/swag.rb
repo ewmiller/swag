@@ -63,8 +63,8 @@ class Swag
 
 	def self.path(arg)
 		begin
-			@config = YAML.load_file('./swag/config.yml')
-			puts "Path to explore: #{@config["host"]}#{@config["basepath"]}#{arg}"
+			config = YAML.load_file('./swag/config.yml')
+			puts "Path to explore: #{config["host"]}#{config["basepath"]}#{arg}"
 		rescue Errno::ENOENT => e
 			puts "Error reading config file. Make sure you run 'swag config'."
 			puts e
@@ -72,7 +72,7 @@ class Swag
 		puts "Is this correct? [y/n]:"
 		answer = STDIN.gets.chomp
 		if answer.downcase == "y"
-			@helper.doPath(arg, @config)
+			@helper.doPath(arg, config)
 		elsif answer == ""
 			puts "yes"
 			@helper.doPath(arg)
