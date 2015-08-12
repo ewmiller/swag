@@ -56,9 +56,9 @@ $DEFAULT_DELETE = {
   "parameters" => [{
     "name" => "id",
     "in" => "path",
-    "description" => "id of entry to be deleted."
-    "required" => "true"
-    "type" => "integer"
+    "description" => "id of entry to be deleted.",
+    "required" => "true",
+    "type" => "integer",
     }],
   "responses" => {
     "200:" => {
