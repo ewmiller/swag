@@ -1,6 +1,5 @@
 require_relative 'swag_helper.rb'
 require_relative 'vars.rb'
-require 'yaml'
 
 
 class Swag
@@ -73,7 +72,7 @@ class Swag
 		puts "Is this correct? [y/n]:"
 		answer = STDIN.gets.chomp
 		if answer.downcase == "y"
-			@helper.doPath(arg)
+			@helper.doPath(arg, @config)
 		elsif answer == ""
 			puts "yes"
 			@helper.doPath(arg)
