@@ -41,20 +41,19 @@ class Swag
 				puts "This is important in order for swag to work properly!"
 				puts "Run 'swag' again when ready. Aborting."
 				abort
-			rescue Errno:ENOENT => e
+			rescue Errno::ENOENT => e
 				puts "Error making directory."
 				puts e
-			end
-			end
-		end
-	end
+			end # end try/catch
+		end # end if/else
+	end # end method
 
 	def self.merge
 		begin
 			doc = File.open("swag/api.yml", 'w')
 			@helper.readConfig(doc)
 			doc.close
-		rescue Errno:ENOENT => e
+		rescue Errno::ENOENT => e
 			puts "Error opening file."
 			puts e
 		rescue IOError => e
@@ -76,5 +75,5 @@ class Swag
 		else
 			puts "?"
 		end
-	end
+	end # end method
 end # end Class
