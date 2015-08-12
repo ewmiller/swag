@@ -53,10 +53,10 @@ class SwagHelper
 
     # write the final product to swag/api.yml
     begin
-      doc = File.open("swag/api.yml", 'w') do
-          doc << api.to_yaml
+      doc = File.open("swag/api.yml", 'w')
+      doc << api.to_yaml
           puts "Wrote api info to swag/api.yml"
-      end
+      doc.close
     rescue Errno::ENOENT => e
       puts "Error creating file: swag/api.yml"
       puts e

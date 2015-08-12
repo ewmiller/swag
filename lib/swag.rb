@@ -73,6 +73,7 @@ class Swag
 		@helper.setupApi unless File.exist?("swag/api.yml")
 		begin
 			api = YAML.load_file('./swag/api.yml')
+			puts api
 			puts "Path to explore: #{api["host"]}#{api["basepath"]}#{arg}"
 		rescue Errno::ENOENT => e
 			puts "Error loading swag/api.yml. Make sure it is configured properly."
