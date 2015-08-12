@@ -51,10 +51,8 @@ class SwagHelper
 
   def doPath(arg, @config)
     input = {
-      "paths" => {
-        "#{arg}" => {
-          # content of path goes here
-        }
+      "#{arg}" => {
+        # content of path goes here
       }
     }
     fullPath = "#{@config["host"]}#{@config["basepath"]}#{arg}"

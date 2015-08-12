@@ -15,6 +15,7 @@ $DEFAULT_CONFIG = {
   "host" => "localhost:3000",
   "basepath" => "/",
   "schemes" => ["http"],
+  "paths" => {}
 }
 
 $DEFAULT_GET = {
