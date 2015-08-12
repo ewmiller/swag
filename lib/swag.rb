@@ -13,7 +13,7 @@ class Swag
 
 	def self.usage
 		puts "Usage: swag <command>"
-		puts "Command options:"
+		puts "Command options: config, <path>, merge"
 		puts "config"
 		puts " - sets up the 'swag' folder in your current directory."
 		puts " - creates 'swag/config.yml' for your API's meta information."
@@ -42,10 +42,25 @@ class Swag
 			abort
 		end
 	end
-	
+
 	def self.merge
 		doc = File.open("swag/api.yml", 'w')
 		@helper.readConfig(doc)
 		doc.close
+	end
+
+	def self.path(arg)
+		puts "Path to explore: /#{arg}"
+		puts "Is this correct? [y/n]:"
+		answer = STDIN.gets.chomp
+		if answer.downcase == "y"
+			puts "yes"
+		elsif answer == ""
+			puts "yes"
+		elsif answer.downcase == "n"
+			puts "no"
+		else
+			puts "?"
+		end
 	end
 end # end Class
