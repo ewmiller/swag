@@ -11,6 +11,23 @@ class Swag
 		puts "Swag, world."
 	end
 
+	def self.usage
+		puts "Usage: swag <command>"
+		puts "Command options:"
+		puts "config"
+		puts " - sets up the 'swag' folder in your current directory."
+		puts " - creates 'swag/config.yml' for your API's meta information."
+		puts " - swag/config.yml MUST exist in order for swag to run properly."
+		puts "<path>"
+		puts " - where <path> is a path in your API to document"
+		puts " - for example , 'swag users' will document the /users path"
+		puts " - documentation is generated as swag/<path>-api.yml"
+		puts "merge"
+		puts " - generates swag/api.yml, a full documentation of your API."
+		puts " - reads from all swag/<path>-api.yml files to accomplish this."
+		puts " - important: you must document each path individually before merging."
+	end
+
 	def self.config
 		puts "Starting configuration..."
 		if File.exist?("swag/config.yml")
@@ -24,12 +41,11 @@ class Swag
 			puts "Run 'swag' again when ready. Aborting."
 			abort
 		end
-
-		def self.write
-			doc = File.open("swag/api.yml", 'w')
-			@helper.readConfig(doc)
-			doc.close
-		end
 	end
-
+	
+	def self.merge
+		doc = File.open("swag/api.yml", 'w')
+		@helper.readConfig(doc)
+		doc.close
+	end
 end # end Class

@@ -11,10 +11,8 @@ class SwagHelper
     # read config.yml in as a Ruby hash. Populate doc with appropriate info.
     config = YAML.load_file('swag/config.yml')
     puts "Loaded config info from swag/config.yml"
-    puts config
-    # TODO: config[:paths] evaluates to nil. this is problem.
-    # Gonna go ahead and not have users submit paths through YAML for now
-    # doc << "#{config.to_yaml}"
+    doc << config.to_yaml
+    puts "Wrote config info to swag/api.yml"
   end
 
   def makeConfig
