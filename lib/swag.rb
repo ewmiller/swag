@@ -39,7 +39,7 @@ class Swag
 				puts "Created swag/config.yml"
 				puts "Please edit swag/config.yml to include your API's meta info."
 				puts "This is important in order for swag to work properly!"
-				puts "Run 'swag' again when ready. Aborting."
+				puts "Run swag again when ready. Aborting."
 				abort
 			rescue Errno::ENOENT => e
 				puts "Error making directory."
