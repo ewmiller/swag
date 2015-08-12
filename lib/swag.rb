@@ -63,7 +63,13 @@ class Swag
 	end
 
 	def self.path(arg)
-		puts "Path to explore: /#{arg}"
+		begin
+			@config = YAML.load_file('./swag/config.yml')
+			puts "Path to explore: #{@config["host"]}#{@config["basepath"]}#{arg}"
+		rescue Errno::ENOENT => e
+			puts "Error reading config file. Make sure you run 'swag config'."
+			puts e
+		end
 		puts "Is this correct? [y/n]:"
 		answer = STDIN.gets.chomp
 		if answer.downcase == "y"

@@ -91,4 +91,25 @@ class SwagHelper
     doc << "          description: unexpected error\n"
     doc << "          schema:\n"
   end
+
+  def doPath(arg)
+    @path = {
+      "#{arg}" => {
+        # content of path goes here
+      }
+    }
+    begin
+      doc = File.open("swag/#{arg}-api.yml", 'w')
+        config = YAML.load_file("swag/config.yml")
+        doc << config.to_yaml
+        puts "Wrote config info to swag/#{arg}-api.yml"
+        doc << @path.to_yaml
+        puts "Wrote path info to swag/#{arg}-api.yml"
+      doc.close
+    rescue Errno::ENOENT => e
+      puts "Error while creating swag/#{arg}-api.yml"
+      puts e
+      puts "Make sure you run 'swag config' if you haven't yet."
+    end
+  end
 end # end class
