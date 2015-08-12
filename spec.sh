@@ -15,4 +15,21 @@ echo "Gem::Specification.new do |s|
   s.executables << 'swag'
   end" > swag.gemspec
 
-echo "SWAG_VERSION = '$version'" > lib/vars.rb
+echo "SWAG_VERSION = '$version'
+
+\$DEFAULT_CONFIG = {
+  :swag => "#{SWAG_VERSION}"
+  :info => {
+    :version => "0.0"
+    :title => "My API."
+    :description => "An API."
+    :author => {
+      :name => "Example"
+      :contact => "example@example.com"
+    }
+    :license => "BSD 3-Clause"
+  }
+  :host => "localhost:3000"
+  :basepath => "/"
+  :schemes => ["http"]
+}" > lib/vars.rb

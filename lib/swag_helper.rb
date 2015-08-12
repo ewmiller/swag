@@ -17,19 +17,7 @@ class SwagHelper
 
   def makeConfig
     config = File.open("swag/config.yml", 'w')
-    config << "swag: '#{SWAG_VERSION}'\n"
-    config << "info:\n"
-    config << "  version: \n"
-    config << "  title: #{File.basename(Dir.pwd)}\n"
-    config << "  description: an API.\n"
-    config << "  author:\n"
-    config << "      name: Example\n"
-    config << "      contact: example@example.com\n"
-    config << "  license: BSD 3-Clause\n"
-    config << "host: localhost:3000\n"
-    config << "basepath: /\n"
-    config << "schemes:\n"
-    config << "  - http\n"
+    config << $DEFAULT_CONFIG.to_yaml
     config.close
   end
 

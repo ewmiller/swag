@@ -67,13 +67,14 @@ class Swag
 		puts "Is this correct? [y/n]:"
 		answer = STDIN.gets.chomp
 		if answer.downcase == "y"
-			puts "yes"
+			@helper.doPath(arg)
 		elsif answer == ""
 			puts "yes"
+			@helper.doPath(arg)
 		elsif answer.downcase == "n"
-			puts "no"
+			puts "Please try again."
 		else
-			puts "?"
+			puts "Please try again."
 		end
 	end # end method
 end # end Class
