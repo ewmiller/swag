@@ -26,9 +26,15 @@ class SwagHelper
 
   def doGet(host, basepath, arg)
     getHash = $DEFAULT_GET
-    puts "Sending an http get request to #{host}#{basepath}#{arg}. Returning a hash."
-    result = Net::HTTP.get("#{host}", "#{basepath}#{arg}")
-    puts result
+    begin
+      puts "Sending an http get request to #{host}#{basepath}#{arg}."
+      uri = URI("http://#{host}#{basepath}#{arg}")
+      result = Net::HTTP.get_response(uri)
+      puts result.body
+    rescue SocketError => e
+      puts "Error sending HTTP request."
+      puts e
+    end
     return getHash
   end
 
