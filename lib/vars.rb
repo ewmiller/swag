@@ -50,6 +50,10 @@ $DEFAULT_POST = {
   },
 }
 
+$DEFAULT_PATCH = {}
+
+$DEFAULT_PUT = {}
+
 $DEFAULT_DELETE = {
   "description" => "",
   "produces" => "",
