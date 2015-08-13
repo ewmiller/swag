@@ -1,4 +1,4 @@
-SWAG_VERSION = '0.5.0'
+SWAG_VERSION = '0.5.1'
 
 $DEFAULT_CONFIG = {
   "swag" => "#{SWAG_VERSION}",

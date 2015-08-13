@@ -24,26 +24,27 @@ class SwagHelper
   #   doc << "  /#{nameSliced}/:id\n"
   # end
 
-  def doGet(host, basePath, arg)
+  def doGet(host, basepath, arg)
     getHash = $DEFAULT_GET
-    puts "Sending an http get request to #{fullPath}. Returning a hash."
-    Net::HTTP.get("#{fullPath}")
+    puts "Sending an http get request to #{host}#{basepath}#{arg}. Returning a hash."
+    result = Net::HTTP.get("#{host}", "#{basepath}#{arg}")
+    puts result
     return getHash
   end
 
-  def doPost(host, basePath, arg)
+  def doPost(host, basepath, arg)
     return $DEFAULT_POST
   end
 
-  def doPatch(host, basePath, arg)
+  def doPatch(host, basepath, arg)
     return $DEFAULT_PATCH
   end
 
-  def doDelete(host, basePath, arg)
+  def doDelete(host, basepath, arg)
     return $DEFAULT_DELETE
   end
 
-  def doPut(host, basePath, arg)
+  def doPut(host, basepath, arg)
     return $DEFAULT_PUT
   end
 
@@ -60,14 +61,14 @@ class SwagHelper
     # the path to send to HTTP methods
     fullPath = "#{api["host"]}#{api["basepath"]}#{arg}"
     host = api["host"]
-    basePath = api["basepath"]
+    basepath = api["basepath"]
 
     # assign the get, post, patch, delete sections for this path
     # call the HTTP methods from above
-    input["#{arg}"]["get"] = doGet(host, basePath, arg)
-    input["#{arg}"]["post"] = doPost(host, basePath, arg)
-    input["#{arg}"]["patch"] = doPatch(host, basePath, arg)
-    input["#{arg}"]["delete"] = doDelete(host, basePath, arg)
+    input["#{arg}"]["get"] = doGet(host, basepath, arg)
+    input["#{arg}"]["post"] = doPost(host, basepath, arg)
+    input["#{arg}"]["patch"] = doPatch(host, basepath, arg)
+    input["#{arg}"]["delete"] = doDelete(host, basepath, arg)
 
     # now that the path info is assigned, combine it with the whole API doc
     api["paths"]["#{arg}"] = input["#{arg}"]
