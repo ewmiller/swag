@@ -18,15 +18,34 @@ class SwagHelper
     doc.close
   end
 
-  # TODO: leaving this as a reminder to implement the /path/:id path thing yeah
+  # TODO: leaving this as a reminder to implement /path/:id
   # def doShow(nameSliced, controllerName, doc)
   #   # puts "#{controllerName} contains show"
   #   doc << "  /#{nameSliced}/:id\n"
   # end
 
   def doGet(fullPath)
+    getArray = $DEFAULT_GET
     puts "Sending an http get request to #{fullPath}. Returning a hash."
-    return $DEFAULT_GET
+
+    return getArray
+  end
+
+  def doPost(fullPath)
+
+  end
+
+  def doPatch(fullPath)
+
+  end
+
+  def doDelete(fullPath)
+
+  end
+
+  # have not implemented yet
+  def doPut(fullPath)
+
   end
 
   def doPath(arg, api)
@@ -44,7 +63,7 @@ class SwagHelper
     # assign the get, post, patch, delete sections for this path
     # call the HTTP methods from above
     input["#{arg}"]["get"] = doGet(fullPath)
-    # input["#{arg}"]["post"] = doPost(fullPath)
+    input["#{arg}"]["post"] = doPost(fullPath)
     # input["#{arg}"]["patch"] = doPatch(fullPath)
     # input["#{arg}"]["delete"] = doDelete(fullPath)
 
